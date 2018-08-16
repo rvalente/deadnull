@@ -1,9 +1,10 @@
 {{ define "main" }}
-  <h1>{{ .Title }}</h1>
+  <h1>{{.Title}}</h1>
   {{ range .Pages }}
     <article>
       <header>
         <h1><a href="{{ .RelPermalink }}">{{ .Title }}</a></h1>
+        <p>By {{ .Site.Params.Author }}. Published <time datetime='{{ .Date.Format "2006-01-02" }}'>{{ .Date.Format "2006-01-02" }}</time></p>
       </header>
     </article>
   {{ end }}

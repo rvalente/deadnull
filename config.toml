@@ -1,3 +1,12 @@
 baseURL = "https://blog.ronvalente.net/"
 languageCode = "en-us"
 title = "deadnull"
+enableRobotsTXT = true
+pygmentsUseClasses = true
+pygmentsCodefences = true
+
+[params]
+  author = "Ronald Valente"
+  email = "ronaldvalente.blog@mailnull.com"
+  twitter = "ronaldvalente"
+  github = "rvalente"

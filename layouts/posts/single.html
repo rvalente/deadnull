@@ -1,0 +1,39 @@
+{{ define "main" }}
+<article>
+  <header>
+    <h1>{{ .Title }}</h1>
+    <p>By {{ .Site.Params.Author }}. Published <time datetime='{{ .Date.Format "2006-01-02" }}'>{{ .Date.Format "2006-01-02" }}</time></p>
+  </header>
+  <aside>
+        <div>
+        <section>
+          <h5 id="wordcount"> {{ .WordCount }} Words </h5>
+        </section>
+        {{ with .Params.categories }}
+        <ul>
+          {{ range . }}
+            <li><a href="{{ "categories" | absURL}}{{ . | urlize }}">{{ . }}</a> </li>
+          {{ end }}
+        </ul>
+        {{ end }}
+        {{ with .Params.tags }}
+        <ul>
+          {{ range . }}
+            <li> <a href="{{ "tags" | absURL }}{{ . | urlize }}">{{ . }}</a> </li>
+          {{ end }}
+        </ul>
+        {{ end }}
+        </div>
+        <div>
+            {{ with .PrevInSection }}
+              <a class="previous" href="{{.Permalink}}"> {{.Title}}</a>
+            {{ end }}
+            {{ with .NextInSection }}
+              <a class="next" href="{{.Permalink}}"> {{.Title}}</a>
+            {{ end }}
+        </div>
+    </aside>
+
+  <p>{{ .Content }}</p>
+</article>
+{{ end }}

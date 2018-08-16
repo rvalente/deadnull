@@ -1,3 +1,11 @@
+<hr />
 <footer>
-<p>2018 © Ronald</p>
+    <ul>
+        <li>Copyright &copy; 2018 {{ .Site.Params.author }}</li>
+        <li><a href='mailto:{{ .Site.Params.Email }}'>Email</a></li>
+        <li><a href='https://github.com/{{ .Site.Params.github }}'>GitHub</a></li>
+        <li><a href='https://twitter.com/{{ .Site.Params.twitter }}'>Twitter</a></li>
+        <li><a href='{{ .Site.BaseURL }}sitemap.xml'>Sitemap</a></li>
+        <li><a href='{{ .Site.BaseURL }}index.xml'>Feed</a></li>
+    </ul>
 </footer>
