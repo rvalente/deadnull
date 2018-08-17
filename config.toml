@@ -1,4 +1,4 @@
-baseURL = "https://blog.ronvalente.net/"
+baseURL = "https://ronvalente.net/"
 languageCode = "en-us"
 title = "deadnull"
 enableRobotsTXT = true
