@@ -46,34 +46,8 @@ h6 {
 }
 
 footer {
-    margin: 0;
-    padding: 0;
-}
-
-footer ul {
-    list-style: none;
     text-align: center;
-    padding: 0;
-    margin: 0;
-}
-
-footer li {
-    font-size: 0.8em;
-    line-height: 40px;
-    height: 40px;
-    border-bottom: 1px solid #888;
-}
-
-@media screen and (min-width: 600px) {
-    footer li {
-        border-bottom: none;
-        height: 50px;
-        line-height: 50px;
-    }
-
-    footer li {
-        display: inline-block;
-    }
+    clear: both;
 }
 
 nav {
