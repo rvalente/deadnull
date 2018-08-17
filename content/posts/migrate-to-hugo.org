@@ -1,0 +1,10 @@
+#+TITLE: Migrate to Hugo
+#+DESCRIPTION: Migration from Jekyll to Hugo
+#+CATEGORIES: blog
+#+TAGS: hugo, org-mode
+#+DATE: 2018-08-16T21:20:14-04:00
+#+DRAFT: true
+
+I am currently in the process of moving from GitHub/Jekyll to Netlify/Hugo and using org-mode as my markup language of choice.
+
+Stay tuned for more soon!
