@@ -3,5 +3,6 @@
 #+CATEGORIES: devops
 #+TAGS: devops, manpages
 #+DATE: 2018-08-16T05:49:49-04:00
+#+DRAFT: false
 
 Seriously... stop asking stupid questions and read the man pages.
