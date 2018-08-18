@@ -24,7 +24,8 @@ Either [[https://github.com/rvalente/dotfiles.git][clone]] down my repo directly
 
 #+BEGIN_SRC shell
 # Clone Repo to .dotfiles
-git clone https://github.com/rvalente/dotfiles.git ~/.dotfiles
+REPO="https://github.com/rvalente/dotfiles.git"
+git clone $REPO ~/.dotfiles
 
 # Install Dotfiles
 cd ~/.dotfiles && ./install.sh
@@ -50,14 +51,18 @@ Ensure you create a ~/.gitconfig.local file with your username/email. You do not
 If you want to update your submodules, then you can quickly run:
 
 #+BEGIN_SRC shell
+# First Run
+git submodule init
+
+# Subsequent Runs
 git submodule update --remote --merge
 #+END_SRC
 
 ** Customization
 
-If you want to tweak/customize you can create a ~/.${file}.local file, this will get loaded at the end of the main file.
+If you want to tweak/customize you can create a =~/.${file}.local= file, this will get loaded at the end of the main file.
 
-For example, if you want to add some aliases to your setup, create a ~/.bash_aliases.local file with all the aliases that you want.
+For example, if you want to add some aliases to your setup, create a =~/.bash_aliases.local= file with all the aliases that you want.
 
 ** Contributors
 
