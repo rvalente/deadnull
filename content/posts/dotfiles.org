@@ -20,7 +20,7 @@ If you want to customize the packages that are installed via Homebrew, do the fo
 cp Brewfile ../.Brewfile
 #+END_SRC
 
-Either [[https://github.com/rvalente/dotfiles.git][clone]] down my repo directly, or [[https://github.com/rvalente/dotfiles][fork]] it and clone your copy down.
+Either [[https://github.com/rvalente/dotfiles.git][clone]] down my repo directly, or [[https://github.com/rvalente/dotfiles/fork][fork]] it and clone your copy down.
 
 #+BEGIN_SRC shell
 # Clone Repo to .dotfiles
@@ -55,9 +55,13 @@ git submodule update --remote --merge
 
 ** Customization
 
-If you want to tweak/customize you can create a ~/.DOTFILE.local file, this will get loaded at the end of the main file.
+If you want to tweak/customize you can create a ~/.${file}.local file, this will get loaded at the end of the main file.
 
 For example, if you want to add some aliases to your setup, create a ~/.bash_aliases.local file with all the aliases that you want.
+
+** Contributors
+
+[[https://github.com/bensallen][Ben Allen]]
 
 ** Credits
 
