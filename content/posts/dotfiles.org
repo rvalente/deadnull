@@ -1,0 +1,64 @@
+#+TITLE: Dotfiles
+#+CATEGORIES: devops
+#+TAGS: devops, dotfiles, sysadmin, macos
+#+DATE: 2018-07-02
+#+DRAFT: false
+
+* Overview
+
+My dotfiles are designed to be setup on macOS only at this time. I have plans to make them platform agnostic in the near-future.
+
+** Disclaimer
+
+This is designed to bootstrap a clean install of macOS Sierra quickly. It will overwrite all the things in your homedir with symlinks!
+
+** Installation
+
+If you want to customize the packages that are installed via Homebrew, do the following:
+
+#+BEGIN_SRC shell
+cp Brewfile ../.Brewfile
+#+END_SRC
+
+Either [[https://github.com/rvalente/dotfiles.git][clone]] down my repo directly, or [[https://github.com/rvalente/dotfiles][fork]] it and clone your copy down.
+
+#+BEGIN_SRC shell
+# Clone Repo to .dotfiles
+git clone https://github.com/rvalente/dotfiles.git ~/.dotfiles
+
+# Install Dotfiles
+cd ~/.dotfiles && ./install.sh
+#+END_SRC
+
+
+** Post-Installation
+
+Ensure you create a ~/.gitconfig.local file with your username/email. You do not want to have this located within the .dotfiles repo!
+
+#+BEGIN_SRC ini
+[user]
+  name = GIT_NAME
+  email = GIT_EMAIL
+
+[github]
+  user = GITHUB_USERNAME
+  token = GITHUB_TOKEN
+#+END_SRC
+
+** Updating
+
+If you want to update your submodules, then you can quickly run:
+
+#+BEGIN_SRC shell
+git submodule update --remote --merge
+#+END_SRC
+
+** Customization
+
+If you want to tweak/customize you can create a ~/.DOTFILE.local file, this will get loaded at the end of the main file.
+
+For example, if you want to add some aliases to your setup, create a ~/.bash_aliases.local file with all the aliases that you want.
+
+** Credits
+
+Thanks to [[http://color.smyck.org][Smyck]] for making a color scheme that doesn't suck.
