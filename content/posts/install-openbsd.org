@@ -1,0 +1,31 @@
+#+TITLE: Install OpenBSD on VMware Fusion
+#+CATEGORIES: devops
+#+TAGS: openbsd, sysadmin, devops, bsd
+#+DATE: 2018-08-18T08:03:36-04:00
+#+DRAFT: true
+
+I have been using OpenBSD and FreeBSD for a long time now. I started as a die-hard FreeBSD advocate
+
+* History
+
+My history with BSD started in the FreeBSD 4.0-RELEASE days.
+
+* Initial Install
+
+Download the latest version of OpenBSD. At the time of writing it is OpenBSD 6.3.
+Here is a [[https://cloudflare.cdn.openbsd.org/pub/OpenBSD/6.3/amd64/install63.iso][direct link]] to the ISO download
+
+OpenBSD 6.3 Release Page: https://www.openbsd.org/63.html
+
+https://cloudflare.cdn.openbsd.org/pub/OpenBSD/6.3/amd64/
+SHA256 (install63.iso) = ee775405dd7926975befbc3fef23de8c4b5a726c3b5075e4848fcd3a2a712ea8
+
+** Installation Overview
+
+VMware Fusion
+New VM
+Install from disc or image
+
+** Resources
+
+[[https://www.openbsd.org/63.html][OpenBSD 6.3 Release]]

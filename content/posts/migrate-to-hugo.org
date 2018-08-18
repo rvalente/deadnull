@@ -1,5 +1,4 @@
 #+TITLE: Migrate to Hugo
-#+DESCRIPTION: Migration from Jekyll to Hugo
 #+CATEGORIES: blog
 #+TAGS: hugo, org-mode
 #+DATE: 2018-08-16T21:20:14-04:00
