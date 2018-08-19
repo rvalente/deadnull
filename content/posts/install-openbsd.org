@@ -1,29 +1,240 @@
 #+TITLE: Install OpenBSD on VMware Fusion
 #+CATEGORIES: devops
 #+TAGS: openbsd, sysadmin, devops, bsd
-#+DATE: 2018-08-18
-#+DRAFT: true
+#+DATE: 2018-08-19
+#+DRAFT: false
 
-I have been using OpenBSD and FreeBSD for a long time now. I started as a die-hard FreeBSD advocate
+I have been using OpenBSD and FreeBSD for a long time now. I started as a die-hard FreeBSD advocate beginning in
+the =4.0-RELEASE= days. Lately I have been using and enjoying OpenBSD more and more. It is very refereshing to have an
+OS that doesn't make assumptions or try overly hard to make things easier through excessive abstractions.
 
-* History
+* Prerequisites
 
-My history with BSD started in the FreeBSD =4.0-RELEASE= days.
+This guide assumes you have VMware Fusion (or similar) however the installation is no different on hardware.
+Note: The links etc are for the =amd64= platform.
 
-* Initial Install
+Download the OpenBSD 6.3 [[https://cloudflare.cdn.openbsd.org/pub/OpenBSD/6.3/amd64/install63.iso][install63.iso]] ISO
+and validate the SHA256 checksum.
 
-Download the latest version of OpenBSD. At the time of writing it is OpenBSD 6.3.
-Here is a [[https://cloudflare.cdn.openbsd.org/pub/OpenBSD/6.3/amd64/install63.iso][direct link]] to the ISO download
+#+BEGIN_SRC shell
+# SHA256 Checksum from Mirror
 SHA256 (install63.iso) = ee775405dd7926975befbc3fef23de8c4b5a726c3b5075e4848fcd3a2a712ea8
 
-** Installation Overview
+# shasum command on macOS
+shasum -a256 install63.iso
+#+END_SRC
 
-VMware Fusion
-New VM
-Install from disc or image
+* Installation
+
+** Preparing your Virtual Machine
+
+Once downloaded, create a VM in VMware Fusion for OpenBSD. For my install I used =Other (64-bit)=.
+
+- VMware Fusion
+- New VM
+- Install from disc or image
+- Select install63.iso
+- Select Desired CPU/Mem/Disk
+- Power On
+
+Now lets get to the actual install...
+
+** OS Installation
+
+Once the VM is started you will see a welcome message:
+
+#+BEGIN_SRC shell
+Welcome to the OpenBSD/amd64 6.3 installation program.
+(I)nstall, (U)pgrade, (A)utoinstall or (S)hell?
+#+END_SRC
+
+Type =i= and hit =Enter=
+
+#+BEGIN_SRC shell
+Choose your keyboard layout ('?' or "l" for list) [default]
+#+END_SRC
+
+Type =Enter=
+
+*** Network Configuration
+
+#+BEGIN_SRC shell
+System hostname? (short form, e.g. 'foo')
+#+END_SRC
+
+Type =bsd= (or anything you want here)
+
+#+BEGIN_SRC shell
+Available network interfaces are: em0 vlan0.
+Which network interface do you wish to configure? (or 'done') [em0]
+#+END_SRC
+
+Type =Enter=
+
+#+BEGIN_SRC shell
+IPv4 address from em0? (or 'dhcp' or 'none') [dhcp]
+#+END_SRC
+
+Type =Enter=, we're using DHCP to get up and running as this isn't a server install.
+For all servers I implore your to use static IP addresses.
+
+#+BEGIN_SRC shell
+IPv6 address for em0? (or 'autoconf' or 'none') [none]
+#+END_SRC
+
+Type =Enter=, IPv6 is not part of this tutorial.
+
+#+BEGIN_SRC shell
+Available network interfaces are: em0 vlan0.
+Which network interface do you wish to configure? (or 'done') [done]
+#+END_SRC
+
+Type =Enter=, we're all set, lets move on.
+
+#+BEGIN_SRC shell
+DNS domain name? (e.g. 'example.com') [my.domain]
+#+END_SRC
+
+I use =.local= for my home lab, select whatever domain you wish here.
+
+*** User and Service Configuration
+
+#+BEGIN_SRC shell
+Password for root account? (will not echo)
+Password for root account? (again)
+#+END_SRC
+
+Please type a secure password. You will also be creating a user account which is the account
+that you will use to login to the machine.
+
+#+BEGIN_SRC shell
+Start sshd(8) by default? [yes]
+#+END_SRC
+
+Type =Enter=,we want to have SSH running by default.
+
+#+BEGIN_SRC shell
+Do you expect to run the X Window System? [yes]
+#+END_SRC
+
+This depends on what your end-goal of the system is. If this is going to be a development machine where you run =i3=
+or similar, then keep this set to yes. On servers I would recommend setting this to no.
+
+#+BEGIN_SRC shell
+Setup a user? (enter a lower-case loginname, or 'no') [no] USERNAME
+Full name for user USERNAME? [USERNAME]
+Password for user USERNAME? (will not echo)
+Password for user USERNAME? (again)
+#+END_SRC
+
+Type a username, I recommend you use the same username as your have on your local machine for simplicity.
+However, you can always configure the ssh client later.
+
+#+BEGIN_SRC shell
+Allow root ssh login? (yes, no, prohibit-password) [no]
+#+END_SRC
+
+Leave this the default, which is no. Remote root login is a bad idea, always.
+
+#+BEGIN_SRC shell
+What timezone are you in? ('?' for list) [America/New_York]
+#+END_SRC
+
+Type =Enter= for the default.
+
+*** Disk Configuration
+
+#+BEGIN_SRC shell
+Available disks are: sd0.
+Which disk is the root disk? ('?' for details) [sd0]
+#+END_SRC
+
+Type =Enter= for the default, since this is a VM, we only have one disk.
+
+#+BEGIN_SRC shell
+No valid MBR or GPT.
+Use (W)hole disk MBR, whole disk (G)PT or (E)dit? [whole]
+#+END_SRC
+
+Type =Enter= for the default.
+
+At this point an auto-allocated lay will appear for sd0, this is most likely suitable for your default install
+on a virtual machine. Adjusting this is beyond the scope of this document.
+
+#+BEGIN_SRC shell
+Use (A)uto layout, (E)dit auto layout, or create (C)ustom layout? [a]
+#+END_SRC
+
+Type =Enter= for the default.
+
+*** Sets Selection and Installation
+
+#+BEGIN_SRC shell
+Lets install the sets!
+Location of sets? (cd0 disk http or 'done') [http]
+HTTP proxy URL? (e.g. 'http://proxy:8080', or 'none') [none]
+HTTP Server? (hostname, list#, 'done', or '?') [fastly.cdn.openbsd.org]
+Server directory? [pub/OpenBSD/6.3/amd64]
+#+END_SRC
+
+Type =Enter= for the default, we will be installing from http to pull and sign the latest install sets.
+You will be prompted for a HTTP proxy URL, type =Enter= if you dont need one.
+
+You will then be prompted for a HTTP server, it should be auto filled with an OpenBSD mirror, type =Enter=.
+
+The server directory will also be auto filled, type =Enter=.
+
+#+BEGIN_SRC shell
+Select sets by entering a set name, a file name pattern or 'all'.
+De-select sets by prepending a '-', e.g. '-game*'.
+Set name(s)? (or 'abort' or 'done') [done]
+#+END_SRC
+
+As we disabled X from our configuration above, lets remove all the X sets. Do this by typing the following:
+
+#+BEGIN_SRC shell
+-x*
+#+END_SRC
+
+All the =x*.tgz= files will be de-selected, type =Enter= to move on.
+At this time the sets will be downloaded and verified via SHA256 signature.
+Once the download and unpack/install is complete, type =Enter= to complete the sets install.
+
+You may be prompted to update the clock at this time.
+
+*** Finished Installation
+
+#+BEGIN_SRC shell
+Saving configuration files...done.
+Making all device nodes...done.
+Relinking to create unique kernel...done.
+
+CONGRATULATIONS! Your OpenBSD install has been successfully completed!
+
+Exit to (S)hell, (H)alt, or (R)eboot? [reboot]
+#+END_SRC
+
+Type =Enter= to reboot into your fresh OpenBSD install!
+
+** First Boot
+
+Once you have finished your install and you have rebooted into your new OS there are a couple things you should do
+right away.
+
+We will kick off =syspatch= and reboot to get all the latest stability, security, and performance fixes.
+
+#+BEGIN_SRC shell
+syspatch
+reboot
+#+END_SRC
+
+** Next Steps
+
+Now that you have a pristine OpenBSD VM installed, it is a good idea to shut it down and create a clone of this.
+It can be the foundation of many services. A future post will go over the automation of this process as well as
+steps I take to further increase and improve the security and configuration of my OpenBSD installs.
 
 ** Resources
 
 - [[https://www.openbsd.org/63.html][OpenBSD 6.3 Release]]
 - [[https://ftp.openbsd.org/pub/OpenBSD/6.3/amd64/INSTALL.amd64][OpenBSD 6.3 INSTALL.amd64]]
-- [[https://cloudflare.cdn.openbsd.org/pub/OpenBSD/6.3/amd64/][OpenBSD 6.3 (amd64)]]
