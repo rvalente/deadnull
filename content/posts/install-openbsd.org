@@ -5,7 +5,7 @@
 #+DRAFT: false
 
 I have been using OpenBSD and FreeBSD for a long time now. I started as a die-hard FreeBSD advocate beginning in
-the =4.0-RELEASE= days. Lately I have been using and enjoying OpenBSD more and more. It is very refereshing to have an
+the =4.0-RELEASE= days. Lately I have been using and enjoying OpenBSD more and more. It is very refreshing to have an
 OS that doesn't make assumptions or try overly hard to make things easier through excessive abstractions.
 
 * Prerequisites
@@ -178,7 +178,7 @@ Server directory? [pub/OpenBSD/6.3/amd64]
 #+END_SRC
 
 Type =Enter= for the default, we will be installing from http to pull and sign the latest install sets.
-You will be prompted for a HTTP proxy URL, type =Enter= if you dont need one.
+You will be prompted for a HTTP proxy URL, type =Enter= if you don't need one.
 
 You will then be prompted for a HTTP server, it should be auto filled with an OpenBSD mirror, type =Enter=.
 
