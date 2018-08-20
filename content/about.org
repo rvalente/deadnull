@@ -16,7 +16,7 @@ This quote from Albert Einstein serves as a reminder to stop over complicating t
 /Everything should be made as simple as possible, but not simpler --Albert Einstein/
 #+END_QUOTE
 
-Extra abstraction layers are most likely not required. Layers of abstraction create a harder mental model to follow,
+Extra abstraction layers are most likely not required. Layers of abstraction create a harder [[https://fs.blog/mental-models/][mental model]] to follow,
 thus increasing the potential for bugs and security holes.
 
 Thank you for stopping by,
