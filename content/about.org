@@ -1,0 +1,24 @@
+#+TITLE: About Me
+
+Hello,
+
+I am an opinionated system administrator (aren't we all?) and architect with over 15 years of experience designing
+innovative solutions to meet both large and small business requirements. I try and isolate the core requirements and
+deliver the most logical and simple solution possible.
+
+My passion for delivering solutions that focus on security, simplicity, and usability is undying. With that being
+said, I don't chase shiny objects and I don't think everything should be written in JavaScript just to name a few of my
+anti-patterns. /I said I was opinionated, right?/
+
+This quote from Albert Einstein serves as a reminder to stop over complicating things.
+
+#+BEGIN_QUOTE
+/Everything should be made as simple as possible, but not simpler --Albert Einstein/
+#+END_QUOTE
+
+Extra abstraction layers are most likely not required. Layers of abstraction create a harder mental model to follow,
+thus increasing the potential for bugs and security holes.
+
+Thank you for stopping by,
+
+Ron Valente

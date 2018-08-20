@@ -1,6 +1,6 @@
 #+TITLE: Dotfiles
 #+CATEGORIES: devops
-#+TAGS: devops, dotfiles, sysadmin, macos
+#+TAGS: devops, dotfiles, sysadmin, mac
 #+DATE: 2018-07-02
 #+DRAFT: false
 
