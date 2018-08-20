@@ -9,4 +9,4 @@ Seriously, *read the fucking man pages* [[https://en.wikipedia.org/wiki/RTFM][RT
 
 If you need to know more after that, then open the source code and start reading.
 
-/PS: Please for the love of all that is good in the world... stop piping curl to sh!/
+/PS: Please for the love of all that is good in the world... don't pipe curl to your shell!/
