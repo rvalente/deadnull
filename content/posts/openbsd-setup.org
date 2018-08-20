@@ -1,9 +1,47 @@
 #+TITLE: OpenBSD Setup
 #+CATEGORIES: devops
 #+TAGS: devops, openbsd, security, development
-#+DATE: 2018-08-19
+#+DATE: 2018-08-21
 #+DRAFT: true
 
-In this post I will go over my initial setup of OpenBSD as a development/sysadmin machine.
+Now that you have completed your initial [[{{< ref "/posts/install-openbsd" >}}][OpenBSD Installation]] we can start
+configuring it for our needs.
 
-Now that you have completed your initial [{{ .RelPermaLink }}][OpenBSD installation]]
+** Overview
+
+I will be using as much of the default install of OpenBSD as possible. Customizing and installing packages only where it makes sense.
+The reason for this is to ensure that we are keeping the footprint as small as possible.
+
+** Prerequisites
+
+You need to have a system running OpenBSD 6.3 or later. Head over to my [[{{< ref "/posts/install-openbsd" >}}][OpenBSD Installation]] post if you need to install OpenBSD.
+
+** SSH
+
+*** Keys
+
+Please create a secure key, worst case use RSA with 4096 bits. Ideally use ed21559. For more information on generating
+a ssh key correct, read [[{{< ref "/posts/update-your-ssh-keys-now" >}}][Update Your SSH Keys Now]].
+
+*** Agent
+
+Add the following to your =~/.profile=
+
+#+BEGIN_SRC shell
+eval $(ssh-agent -s)
+#+END_SRC
+
+** GPG
+
+*** Installation
+
+#+BEGIN_SRC shell
+doas pkg_add gpg2
+#+END_SRC
+
+*** Configuration
+
+#+BEGIN_SRC shell
+alias gpg='gpg2'
+export GPG_TTY=$(tty)
+#+END_SRC
