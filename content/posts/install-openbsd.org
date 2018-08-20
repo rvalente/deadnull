@@ -8,7 +8,7 @@ I have been using OpenBSD and FreeBSD for a long time now. I started as a die-ha
 the =4.0-RELEASE= days. Lately I have been using and enjoying OpenBSD more and more. It is very refreshing to have an
 OS that doesn't make assumptions or try overly hard to make things easier through excessive abstractions.
 
-* Prerequisites
+** Prerequisites
 
 This guide assumes you have VMware Fusion (or similar) however the installation is no different on hardware.
 Note: The links etc are for the =amd64= platform.
@@ -24,9 +24,9 @@ SHA256 (install63.iso) = ee775405dd7926975befbc3fef23de8c4b5a726c3b5075e4848fcd3
 shasum -a256 install63.iso
 #+END_SRC
 
-* Installation
+** Installation
 
-** Preparing your Virtual Machine
+*** Preparing your Virtual Machine
 
 Once downloaded, create a VM in VMware Fusion for OpenBSD. For my install I used =Other (64-bit)=.
 
@@ -39,7 +39,7 @@ Once downloaded, create a VM in VMware Fusion for OpenBSD. For my install I used
 
 Now lets get to the actual install...
 
-** OS Installation
+*** OS Installation
 
 Once the VM is started you will see a welcome message:
 
@@ -56,7 +56,7 @@ Choose your keyboard layout ('?' or "l" for list) [default]
 
 Type =Enter=
 
-*** Network Configuration
+**** Network Configuration
 
 #+BEGIN_SRC shell
 System hostname? (short form, e.g. 'foo')
@@ -97,7 +97,7 @@ DNS domain name? (e.g. 'example.com') [my.domain]
 
 I use =.local= for my home lab, select whatever domain you wish here.
 
-*** User and Service Configuration
+**** User and Service Configuration
 
 #+BEGIN_SRC shell
 Password for root account? (will not echo)
@@ -142,7 +142,7 @@ What timezone are you in? ('?' for list) [America/New_York]
 
 Type =Enter= for the default.
 
-*** Disk Configuration
+**** Disk Configuration
 
 #+BEGIN_SRC shell
 Available disks are: sd0.
@@ -167,7 +167,7 @@ Use (A)uto layout, (E)dit auto layout, or create (C)ustom layout? [a]
 
 Type =Enter= for the default.
 
-*** Sets Selection and Installation
+**** Sets Selection and Installation
 
 #+BEGIN_SRC shell
 Lets install the sets!

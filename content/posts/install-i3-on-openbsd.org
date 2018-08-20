@@ -1,0 +1,59 @@
+#+TITLE: Install I3 on OpenBSD
+#+CATEGORIES: devops
+#+TAGS: devops, openbsd, i3
+#+DATE: 2018-08-20
+#+DRAFT: false
+
+In this post I will be going over the i3wm setup I have on my OpenBSD development/admin machine.
+If you need to setup an OpenBSD machine, you can follow my [[{{< ref "/posts/install-openbsd" >}}][Install OpenBSD]] post.
+
+/Note: In this post I remove all X components from the install, so skip that step if this will be a dev machine and you want a UI./
+
+** Installation
+
+First, lets install i3
+
+#+BEGIN_SRC shell
+doas pkg_add i3
+#+END_SRC
+
+** Configuration
+
+Now, copy the main i3status conf to your home folder.
+
+#+BEGIN_SRC shell
+cp /usr/local/share/examples/i3status/i3status.conf ~/.i3status.conf
+#+END_SRC
+
+Now, Create your =~/.xinitrc= to start i3 when X starts.
+
+#+BEGIN_SRC shell
+echo "i3" > ~/.xinitrc
+#+END_SRC
+
+** Terminal Emulator
+
+If you want to use something other than =xterm= then I recommend =urxvt=. Start off by installing rxvt-unicode.
+
+#+BEGIN_SRC shell
+pkg_add rxvt-unicode
+#+END_SRC
+
+Now let's tell i3 to use urxvt instead of xterm
+
+#+BEGIN_SRC diff
+--- i3old       Sun Aug 19 14:08:00 2018
++++ i3new       Sun Aug 19 14:08:07 2018
+@@ -30,7 +30,7 @@
+ floating_modifier $mod
+
+ # start a terminal
+-bindsym $mod+Return exec /usr/X11R6/bin/xterm
++bindsym $mod+Return exec /usr/local/bin/urxvt
+
+ # kill focused window
+ bindsym $mod+Shift+q kill
+#+END_SRC
+
+Now, when you run =startx= you UI will start and prompt you the first time for a couple configuration options.
+Congratulations, you now have i3 running with urxvt!

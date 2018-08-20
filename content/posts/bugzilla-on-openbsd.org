@@ -1,7 +1,7 @@
-#+TITLE: Bugzilla on OpenBSD
+#+TITLE: Install Bugzilla on OpenBSD
 #+CATEGORIES: devops
 #+TAGS: bugs, bugzilla, sysadmin, devops
-#+DATE: 2018-08-17T15:41:00-04:00
+#+DATE: 2018-08-22
 #+DRAFT: true
 
-Bugzilla is a popular
+The objective of this post is to install Bugzilla on OpenBSD 6.3 using the built in webserver and slowcgi.

@@ -1,0 +1,9 @@
+#+TITLE: OpenBSD Setup
+#+CATEGORIES: devops
+#+TAGS: devops, openbsd, security, development
+#+DATE: 2018-08-19
+#+DRAFT: true
+
+In this post I will go over my initial setup of OpenBSD as a development/sysadmin machine.
+
+Now that you have completed your initial [{{ .RelPermaLink }}][OpenBSD installation]]
