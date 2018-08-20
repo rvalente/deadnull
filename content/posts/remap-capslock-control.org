@@ -1,0 +1,23 @@
+#+TITLE: Remap Capslock Control
+#+CATEGORIES: sysadmin
+#+TAGS: mac, efficiency, sysadmin
+#+DATE: 2015-08-21
+#+DRAFT: false
+
+I cannot remember the last time that I used the capslock key. This is because it is not useful.
+There is never a scenario where it is beneficial or socially acceptable to use the capslock key.
+
+** Why Remap Capslock to Control?
+
+Do yourself a favor, remap capslock to control and enjoy many years of conflict-free typing.
+As a side benefit it will also reduce the /hook pinky finger/ from not having to use the control
+key all-the-way-down-in-the-bottom-left-corner of the keyboard key.
+
+** How It's Done
+
+1. Open "System Preferences"
+2. Click "Keyboard"
+3. Click "Modifier Keys"
+4. Set Caps Lock to "^ Control"
+
+That's it, you're all set!
