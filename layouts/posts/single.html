@@ -6,7 +6,7 @@
   </header>
   <p>{{ .Content }}</p>
   <aside>
-    <a href="https://github.com/rvalente/deadnull/commits/master/content/{{ .File.Path }}">{{ .Title }} - Commit History</a>
+    <a href="https://github.com/{{ .Site.Params.github }}/{{ .Site.Title }}/commits/master/content/{{ .File.Path }}">{{ .Title }} - Commit History</a>
   </aside>
 </article>
 {{ end }}
