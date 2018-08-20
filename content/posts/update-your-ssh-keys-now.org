@@ -6,22 +6,35 @@
 
 *PSA: _Stop using your SSH RSA keys from 10 years ago!_*
 
+** Background
+
 Changing your SSH key doesn't have to be hard, and it should be done. Please stop using your RSA keys with 1024 bit size.
 Sadly, the default is still 2048 bits, which is still not good enough. If you're going to use RSA keys, ensure they're 4096 bits.
 Best choice is to use ed25519 keys.
 
+Let's be honest, anything that [[https://cr.yp.to/djb.html][D. J. Bernstein]] is involved in is pretty damn epic.
+
 #+BEGIN_QUOTE
 [[https://man.openbsd.org/ssh-keygen][ssh-keygen(1)]] generates, manages and converts authentication keys for [[https://man.openbsd.org/ssh][ssh(1)]].
-[[https://man.openbsd.org/ssh-keygen][ssh-keygen(1)]] can create keys for use by SSH protocol version 2.
 #+END_QUOTE
 
-Generate a secure client SSH key.
+** Generate SSH Key
+
+Generate a secure client SSH key with the recommended =ed25519= type
 
 #+BEGIN_SRC shell
-ssh-keygen -t ed25519 -o -a 100
+ssh-keygen -t ed25519 -a 100
 #+END_SRC
 
 When prompted, /please/, type a password ([[https://man.openbsd.org/ssh-agent][ssh-agent(1)]] is your friend).
+
+** Flags Explained
+
+| Flag | Details |
+|-----|----|
+| *=-t ed25519=* | Use the recommended =ed25519= key type instead of the default rsa 2048-bit key                         |
+| *=-a 100=*     | # of key derivation function rounds used, higher = increased resistance to brute-force cracking        |
+| *=-o=*         | Not required with the ed25519 key type, defaults to the correct format instead of the older PEM format |
 
 * Resources
 
@@ -31,3 +44,4 @@ When prompted, /please/, type a password ([[https://man.openbsd.org/ssh-agent][s
 - [[https://man.openbsd.org/ssh-keygen][ssh-keygen(1)]]
 - [[https://blog.g3rt.nl/upgrade-your-ssh-keys.html#upgrade-your-current-rsa-key][Upgrade Your SSH Keys]]
 - [[https://stribika.github.io/2015/01/04/secure-secure-shell.html][Secure Secure Shell]]
+- [[https://ed25519.cr.yp.to][ed25519 key format]]
