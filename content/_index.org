@@ -1,0 +1,12 @@
+#+TITLE: Home
+
+This is my content-heavy blog that focuses on system administration solutions, security, and simplicity. I will
+try and post here regularly. My goal is to provide insight into why decisions are made so my readers can understand why
+and not just be copy-paste robots.
+
+This age of New Project -> Open Stack Overflow -> Copy -> Paste -> Deploy to Production needs to stop. Google is good, man pages are forever.
+Seriously, *read the fucking man pages* [[https://en.wikipedia.org/wiki/RTFM][RTFM]], then look at the [[https://www.rfc-editor.org/search/rfc_search.php][RFCs]].
+
+If you need to know more after that, then open the source code and start reading.
+
+/PS: Please for the love of all that is good in the world... stop piping curl to sh!/
