@@ -1,0 +1,46 @@
+#+TITLE: FreeBSD DynamicDNS with ddclient and Namecheap
+#+CATEGORIES: sysadmin
+#+TAGS: freebsd, dynamicdns, dns
+#+DATE: 2016-01-06
+#+DRAFT: false
+
+First, we need to install =ddclient= on our FreeBSD machine. For this you can use ports or pkgng.
+In this guide I will use pkgng for speed and simplicity.
+
+#+BEGIN_SRC shell
+pkg install ddclient
+#+END_SRC
+
+Once installed, configure ddclient to start on boot by running the following:
+
+#+BEGIN_SRC shell
+sysrc ddclient_enable="YES"
+#+END_SRC
+
+Lastly, we need to configure ddclient to talk with namecheap. Here is the configuration options in
+order to make this happen. =vi # /usr/local/etc/ddclient.conf=
+
+#+BEGIN_SRC shell
+daemon=300                 # check every 300 seconds
+syslog=yes                 # log update msgs to syslog
+mail=root                  # mail all msgs to root
+mail-failure=root          # mail failed update msgs to root
+pid=/var/run/ddclient.pid  # record PID in file.
+ssl=yes                    # use ssl-support.  Works with
+                           # ssl-library
+
+use=web, web=dynamicdns.park-your-domain.com/getip
+protocol=namecheap
+server=dynamicdns.park-your-domain.com
+login=yourdomain.com
+password=RANDOM_API_PASSWORD_KEY
+@
+A_RECORD
+A_RECORD_TWO
+#+END_SRC
+
+If you need to dynamically update a subdomain then you need to subsititute host as subdomain. To dynamically update the domain itself (yourdomain.com), you need to replace host with @.
+
+** Resources
+
+- [[https://www.namecheap.com/support/knowledgebase/article.aspx/595/11][Namecheap ddclient Docs]]
