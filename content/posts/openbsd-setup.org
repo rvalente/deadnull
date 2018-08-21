@@ -4,7 +4,7 @@
 #+DATE: 2018-08-22
 #+DRAFT: true
 
-In this post I will be going over how I setup my OpenBSD development/admin machine. To follow allong you'll need an
+In this post I will be going over how I setup my OpenBSD development/admin machine. To follow along you'll need an
 OpenBSD machine or virtual machine. Head over to my [[{{< ref "/posts/install-openbsd" >}}][OpenBSD Installation]]
 post if you need to install OpenBSD.
 

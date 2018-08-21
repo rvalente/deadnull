@@ -6,6 +6,6 @@
 
 I have completely shifted directions in terms of my blog design/implementation. To align more closely with my strategy when it comes to architecture and design, I have re-implemented my blog in the most minimal way possible.
 
-I am currently working on a complete cleanup to remove all unecessary cruft. Cleaner pages, less styles, and most importantly remove all the tracking code that existed on the pages previously.
+I am currently working on a complete cleanup to remove all unnecessary cruft. Cleaner pages, less styles, and most importantly remove all the tracking code that existed on the pages previously.
 
 I am no longer using Google Analytics or Disqus comments. Eventually I might re-visit a comment solution.

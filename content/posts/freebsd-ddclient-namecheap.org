@@ -39,7 +39,7 @@ A_RECORD
 A_RECORD_TWO
 #+END_SRC
 
-If you need to dynamically update a subdomain then you need to subsititute host as subdomain. To dynamically update the domain itself (yourdomain.com), you need to replace host with @.
+If you need to dynamically update a subdomain then you need to substitute host as subdomain. To dynamically update the domain itself (yourdomain.com), you need to replace host with @.
 
 ** Resources
 
