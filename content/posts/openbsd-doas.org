@@ -1,0 +1,72 @@
+#+TITLE: OpenBSD doas
+#+CATEGORIES: sysadmin
+#+TAGS: security, bsd, sysadmin
+#+DATE: 2018-08-21T05:22:19-04:00
+#+DRAFT: false
+
+** Overview
+
+OpenBSD ships with a refreshingly minimal approach to running commands as another user called =doas=.
+Typically [[https://www.sudo.ws][Sudo]] is used for this. While sudo is great, it brings a great deal of
+complexity. If you're using sudo I high recommend reading [[https://amzn.to/2w2eKFw][Sudo Mastery]] by Michael W Lucas.
+
+The motivation for replacing =sudo= with =doas= is the same motivaition I have in using OpenBSD. It truly delivers on
+quality over quantity, keeping everything simple, and an undying focus on security.
+
+** Installation
+
+Good news, =doas= ships with OpenBSD, nothing needed to install!
+
+** Configuration
+
+The configuration for doas is extremely easy to understand. This is imperative for such a critical piece of security
+software on your systems.
+
+From the [[https://man.openbsd.org/doas.conf.5][doas.conf(5)]] manpage, the format for a config line is as follows:
+
+#+BEGIN_SRC shell
+permit|deny [options] identity [as target] [cmd command [args ...]]
+#+END_SRC
+
+So a very basic config, that would allow your primary user (bob) run commands as root would be:
+
+#+BEGIN_SRC shell
+permit bob as root
+#+END_SRC
+
+There are other options as well and I encourage you to head over to the man page for more details.
+
+** Audit
+
+So, one key asept of both =sudo= and =doas= is the ability to audit who ran what, and when they ran it.
+
+So for this exercise, we will have bob try and change the hostname of our machine...
+
+#+BEGIN_SRC shell
+dev$ hostname foo
+hostname: sethostname: Operation not permitted
+dev$
+#+END_SRC
+
+As you can see, the operation was not permitted. Now let us prefix the command with doas.
+
+#+BEGIN_SRC shell
+dev$ doas hostname foo
+foo$
+#+END_SRC
+
+There, our hostname is now foo!
+
+If we want to see the log, we just need to view =/var/log/secure=.
+
+#+BEGIN_SRC shell
+# /var/log/secure
+Aug 19 20:09:28 dev doas: bob ran command hostname foo as root from /home/bob
+#+END_SRC
+
+** Resources
+
+- [[https://man.openbsd.org/doas][doas(1)]]
+- [[https://man.openbsd.org/doas.conf.5][doas.conf(5)]]
+- [[https://www.sudo.ws][Sudo]]
+- [[https://amzn.to/2w2eKFw][Sudo Mastery]]

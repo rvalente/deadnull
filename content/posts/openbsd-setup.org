@@ -1,22 +1,28 @@
 #+TITLE: OpenBSD Setup
 #+CATEGORIES: devops
 #+TAGS: devops, openbsd, security, development
-#+DATE: 2018-08-21
+#+DATE: 2018-08-22
 #+DRAFT: true
 
-Now that you have completed your initial [[{{< ref "/posts/install-openbsd" >}}][OpenBSD Installation]] we can start
-configuring it for our needs.
-
-** Overview
+In this post I will be going over how I setup my OpenBSD development/admin machine. To follow allong you'll need an
+OpenBSD machine or virtual machine. Head over to my [[{{< ref "/posts/install-openbsd" >}}][OpenBSD Installation]]
+post if you need to install OpenBSD.
 
 I will be using as much of the default install of OpenBSD as possible. Customizing and installing packages only where it makes sense.
 The reason for this is to ensure that we are keeping the footprint as small as possible.
 
 ** Prerequisites
 
-You need to have a system running OpenBSD 6.3 or later. Head over to my [[{{< ref "/posts/install-openbsd" >}}][OpenBSD Installation]] post if you need to install OpenBSD.
+You need to have a system running OpenBSD 6.3 or later.
+
+** Command
+
+
 
 ** SSH
+
+OpenSSH is extremely powerful I will be doing a dedicated post for OpenSSH configuration. In the meantime I highly
+recommend picking up [[https://amzn.to/2BuesMF][SSH Mastery]] by Michael W Lucas and reading it cover to cover.
 
 *** Keys
 
