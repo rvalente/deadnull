@@ -1,0 +1,175 @@
+#+TITLE: Alpine Linux Stateful Firewall
+#+CATEGORIES: sysadmin
+#+TAGS: nft, iptables, linux, firewall, security
+#+DATE: 2017-02-08
+#+DRAFT: false
+
+A small consumer router/firewall doesn't cut it anymore. For a little bit more money you can have a much higher performing router that you control. To me, nothing beats the complete control of running your own firewall config and being able to handle and shape traffic as you please.
+
+This guide will go over setting up the server. In subsequent posts I will go over the stateful rules in more detail as well as some DHCP/DNS configurations to help secure your home network.
+
+** Hardware Build
+
+Before we dive into the OS install and configuration I want to take a moment to discuss hardware component selection...
+
+For a stateful firewall the most important component is your CPU, more specifically the clock speed. While more cores wont hurt, your throughput will be directly correlated to your single-core clock speed. Next mort important is memory, you will want to ensure that you have enough RAM to handle your NAT translations. 8GB of RAM should be more than plenty to handle a home router setup.
+
+Here is the list of Parts that I used for the router build. My objective in addition to speed was to have a very small, quiet, and cool running router. With the case that I selected, water cooling was basically required.
+
+- **CPU:** Intel Pentium G4400 3.3GHz Dual-Core Processor
+- **CPU Cooler:** ARCTIC Liquid Freezer 120 74.0 CFM Liquid CPU Cooler
+- **Motherboard:** Gigabyte GA-H170N-WIFI Mini ITX LGA1151 Motherboard
+- **Memory:** Crucial 8GB (2 x 4GB) DDR4-2133 Memory
+- **Storage:** Transcend 32GB 2.5" Solid State Drive
+- **Case:** Cooler Master Elite 110 Mini ITX Tower Case
+- **Power Supply:** EVGA BQ 500W 80+ Bronze Certified Semi-Modular ATX Power Supply
+
+Here is a link to the parts that I used for this build. [High Throughput Router](https://pcpartpicker.com/user/deadnull/saved/chyt6h)
+
+** Alpine Install
+
+*** Download Alpine
+
+You will want to grab the latest version of [Alpine Linux](https://alpinelinux.org/downloads/), at the time of writing it was 3.5.1.
+
+For the router build, I followed the suggestion to use the [alpine-extended-3.5.1-x86_64.iso](https://nl.alpinelinux.org/alpine/v3.5/releases/x86_64/alpine-extended-3.5.1-x86_64.iso). Ensure that you verify the SHA256 hash after you download the ISO.
+
+=SHA256 (4fa1eabb53166009589d269a045c4f22454aeb9ba9103e291be031b659852cb9)=
+
+Below is the answer file used to install Alpine. You do not need to automate the install, this is just here for documentation.
+
+#+BEGIN_SRC shell
+# Use US layout with US variant
+KEYMAPOPTS="us us"
+
+# Set hostname to alpine-test
+HOSTNAMEOPTS="-n fw"
+
+# Contents of /etc/network/interfaces
+INTERFACESOPTS="auto lo
+iface lo inet loopback
+
+auto eth0
+iface eth0 inet dhcp
+  hostname fw
+
+auto eth1
+iface eth1 inet static
+  address 10.0.0.1
+  netmask 255.255.255.0"
+
+# Search domain of example.com, Google public nameserver
+DNSOPTS=""
+
+# Set timezone to UTC
+TIMEZONEOPTS="-z UTC"
+
+# set http/ftp proxy
+PROXYOPTS=""
+
+# Add a random mirror
+APKREPOSOPTS="-f"
+
+# Install Openssh
+SSHDOPTS="-c openssh"
+
+# Use Chrony
+NTPOPTS="-c chrony"
+
+# Use /dev/sda as a lvmsys disk
+DISKOPTS="-m sys /dev/sda"
+#+END_SRC
+
+** Configuration
+
+For the stateful firewall, we only need nftables in addition to the default install.
+
+#+BEGIN_SRC shell
+apk add nftables
+#+END_SRC
+
+If you want to enable logging of firewall events, add this to `/etc/modules` and ensure you reboot or modprobe it.
+
+#+BEGIN_SRC shell
+echo "ipt_LOG" | tee -a /etc/modules
+#+END_SRC
+
+Now last but not least, we need to tell the Kernel that it can forward IP packets between interfaces. Open `/etc/sysctl.conf` and add the following lines and then reboot.
+
+#+BEGIN_SRC shell
+net.ipv4.ip_forward = 1
+vm.swappiness = 10
+#+END_SRC
+
+** Firewall
+
+Last but not least, here is an example set of commented firewall rules to get you started.
+
+#+BEGIN_SRC shell
+#!/usr/sbin/nft -f
+
+flush ruleset
+
+# Interfaces and Networks
+define wan = eth0
+define lan = eth1
+
+table ip filter {
+  chain input {
+    type filter hook input priority 0; policy drop;
+
+    # Drop All Martians
+    meta iif $wan ip saddr { 192.168.0.0/16, 10.0.0.0/8, 172.16.0.0/12 } log counter drop
+
+    # Drop and Log Invalid Connections
+    ct state invalid log counter drop
+
+    # Allow All Loopback Traffic
+    meta iif lo ct state new accept
+
+    # Allow LAN Inbound Traffic
+    meta iif $lan ct state new accept
+
+    # Respond to ICMP Echo Requests Only
+    icmp type echo-request accept
+
+    # established/related connections
+    ct state established,related accept
+  }
+
+  chain forward {
+    type filter hook forward priority 0; policy drop;
+
+    # Allow LAN Traffic out the WAN Interface
+    meta iif $lan meta oif $wan accept
+
+    # Allow Related Traffic
+    meta iif $wan meta oif $lan ct state established,related accept
+  }
+
+  chain output {
+    type filter hook output priority 0; policy accept;
+  }
+}
+
+# The first packet in each flow will hit this table; none others will
+table ip nat {
+  chain prerouting {
+    type nat hook prerouting priority -150;
+  }
+
+  chain postrouting {
+    type nat hook postrouting priority -150;
+    oif $wan masquerade persistent
+  }
+}
+#+END_SRC
+
+** Resources
+
+- [[https://alpinelinux.org][Alpine Linux]]
+- [[https://netfilter.org/projects/nftables/][Netfilter nftables]]
+- [[https://wiki.nftables.org/wiki-nftables/index.php/Main_Page][nftables wiki]]
+- [[https://wiki.archlinux.org/index.php/nftables][ArchLinux nftables]]
+- [[https://wiki.gentoo.org/wiki/Nftables][Gentoo Nftables]]
+- [[https://wiki.debian.org/nftables][Debian Nftables]]
