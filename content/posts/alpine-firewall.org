@@ -4,17 +4,24 @@
 #+DATE: 2017-02-08
 #+DRAFT: false
 
-A small consumer router/firewall doesn't cut it anymore. For a little bit more money you can have a much higher performing router that you control. To me, nothing beats the complete control of running your own firewall config and being able to handle and shape traffic as you please.
+A small consumer router/firewall doesn't cut it anymore. For a little bit more money you can have a much higher
+performing router that you control. To me, nothing beats the complete control of running your own firewall config and
+being able to handle and shape traffic as you please.
 
-This guide will go over setting up the server. In subsequent posts I will go over the stateful rules in more detail as well as some DHCP/DNS configurations to help secure your home network.
+This guide will go over setting up the server. In subsequent posts I will go over the stateful rules in more detail as
+well as some DHCP/DNS configurations to help secure your home network.
 
 ** Hardware Build
 
 Before we dive into the OS install and configuration I want to take a moment to discuss hardware component selection...
 
-For a stateful firewall the most important component is your CPU, more specifically the clock speed. While more cores wont hurt, your throughput will be directly correlated to your single-core clock speed. Next mort important is memory, you will want to ensure that you have enough RAM to handle your NAT translations. 8GB of RAM should be more than plenty to handle a home router setup.
+For a stateful firewall the most important component is your CPU, more specifically the clock speed. While more cores
+wont hurt, your throughput will be directly correlated to your single-core clock speed. Next mort important is memory,
+you will want to ensure that you have enough RAM to handle your NAT translations. 8GB of RAM should be more than plenty
+to handle a home router setup.
 
-Here is the list of Parts that I used for the router build. My objective in addition to speed was to have a very small, quiet, and cool running router. With the case that I selected, water cooling was basically required.
+Here is the list of Parts that I used for the router build. My objective in addition to speed was to have a very small,
+quiet, and cool running router. With the case that I selected, water cooling was basically required.
 
 - **CPU:** Intel Pentium G4400 3.3GHz Dual-Core Processor
 - **CPU Cooler:** ARCTIC Liquid Freezer 120 74.0 CFM Liquid CPU Cooler
@@ -24,15 +31,19 @@ Here is the list of Parts that I used for the router build. My objective in addi
 - **Case:** Cooler Master Elite 110 Mini ITX Tower Case
 - **Power Supply:** EVGA BQ 500W 80+ Bronze Certified Semi-Modular ATX Power Supply
 
-Here is a link to the parts that I used for this build. [High Throughput Router](https://pcpartpicker.com/user/deadnull/saved/chyt6h)
+Here is a link to the parts that I used for this build.
+[[https://pcpartpicker.com/user/deadnull/saved/chyt6h][High Throughput Router]]
 
 ** Alpine Install
 
 *** Download Alpine
 
-You will want to grab the latest version of [Alpine Linux](https://alpinelinux.org/downloads/), at the time of writing it was 3.5.1.
+You will want to grab the latest version of [[https://alpinelinux.org/downloads/][Alpine Linux]], at the time of writing
+it was 3.5.1.
 
-For the router build, I followed the suggestion to use the [alpine-extended-3.5.1-x86_64.iso](https://nl.alpinelinux.org/alpine/v3.5/releases/x86_64/alpine-extended-3.5.1-x86_64.iso). Ensure that you verify the SHA256 hash after you download the ISO.
+For the router build, I followed the suggestion to use the
+[[https://nl.alpinelinux.org/alpine/v3.5/releases/x86_64/alpine-extended-3.5.1-x86_64.iso][alpine-extended-3.5.1-x86_64.iso]].
+Ensure that you verify the SHA256 hash after you download the ISO.
 
 =SHA256 (4fa1eabb53166009589d269a045c4f22454aeb9ba9103e291be031b659852cb9)=
 
@@ -94,7 +105,7 @@ If you want to enable logging of firewall events, add this to `/etc/modules` and
 echo "ipt_LOG" | tee -a /etc/modules
 #+END_SRC
 
-Now last but not least, we need to tell the Kernel that it can forward IP packets between interfaces. Open `/etc/sysctl.conf` and add the following lines and then reboot.
+Now last but not least, we need to tell the Kernel that it can forward IP packets between interfaces. Open =/etc/sysctl.conf= and add the following lines and then reboot.
 
 #+BEGIN_SRC shell
 net.ipv4.ip_forward = 1
