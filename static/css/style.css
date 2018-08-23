@@ -79,9 +79,9 @@ nav ul {
 }
 
 nav li {
-    font-size: 1.0em;
-    line-height: 30px;
-    height: 30px;
+    font-size: 1.2em;
+    line-height: 40px;
+    height: 40px;
     border-bottom: 1px solid #888;
 }
 
@@ -98,11 +98,11 @@ nav a:hover {
 
 @media screen and (min-width: 600px) {
     nav li {
-        width: 100px;
+        width: 120px;
         border-bottom: none;
-        height: 30px;
-        line-height: 30px;
-        font-size: 1.0em;
+        height: 50px;
+        line-height: 50px;
+        font-size: 1.4em;
     }
 
     nav li {
