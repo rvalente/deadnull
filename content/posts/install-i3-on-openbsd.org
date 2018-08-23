@@ -19,11 +19,10 @@ doas pkg_add i3
 
 ** Configuration
 
-Now, copy the main i3status conf to your home folder.
+Now, create an =.i3status.conf= file in your homedir.
 
-#+BEGIN_SRC shell
-cp /usr/local/share/examples/i3status/i3status.conf ~/.i3status.conf
-#+END_SRC
+You can either use the default, located here =/usr/local/share/examples/i3status/i3status.conf=.
+Or write your own, using the [[https://github.com/i3/i3status/blob/master/i3status.conf][i3status.conf]] as a starting point.
 
 Now, Create your =~/.xinitrc= to start i3 when X starts.
 
