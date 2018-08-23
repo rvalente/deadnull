@@ -13,15 +13,13 @@ OS that doesn't make assumptions or try overly hard to make things easier throug
 This guide assumes you have VMware Fusion (or similar) however the installation is no different on hardware.
 Note: The links etc are for the =amd64= platform.
 
-Download the OpenBSD 6.3 [[https://cloudflare.cdn.openbsd.org/pub/OpenBSD/6.3/amd64/install63.iso][install63.iso]] ISO
-and validate the SHA256 checksum.
+Download the OpenBSD 6.3 [[https://cloudflare.cdn.openbsd.org/pub/OpenBSD/6.3/amd64/install63.iso][install63.iso]] ISO file.
+Download the OpenBSD 6.3 [[https://cloudflare.cdn.openbsd.org/pub/OpenBSD/6.3/amd64/SHA256][sha256]] checksum file.
 
 #+BEGIN_SRC shell
-# SHA256 Checksum from Mirror
-SHA256 (install63.iso) = ee775405dd7926975befbc3fef23de8c4b5a726c3b5075e4848fcd3a2a712ea8
-
-# shasum command on macOS
-shasum -a256 install63.iso
+cd ~/Downloads # or wherever your iso and sha256 file are
+shasum -a256 -c SHA256 --ignore-missing
+install63.iso: OK
 #+END_SRC
 
 ** Installation
